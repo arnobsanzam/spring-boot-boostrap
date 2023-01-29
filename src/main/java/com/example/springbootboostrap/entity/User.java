@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 @Getter
 @Setter
 public class User extends BaseEntity implements UserDetails {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;

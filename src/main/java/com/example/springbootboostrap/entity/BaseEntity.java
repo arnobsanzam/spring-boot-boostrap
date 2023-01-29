@@ -10,6 +10,7 @@ import java.util.Date;
 @MappedSuperclass
 @Data
 public class BaseEntity {
+
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date createdAt;
 

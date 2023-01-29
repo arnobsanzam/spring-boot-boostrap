@@ -15,6 +15,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class UserMapper extends BaseMapper {
+
     private final ModelMapper modelMapper;
 
     public User toEntity(UserCreationRequest request) {

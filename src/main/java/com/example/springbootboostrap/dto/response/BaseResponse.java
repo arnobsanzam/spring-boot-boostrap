@@ -9,10 +9,15 @@ import java.util.Date;
 public class BaseResponse {
 
     private String requestId;
+
     private StatusType status;
+
     private Date requestTime;
+
     private Long processingTime;
+
     private Date responseTime;
+
     private String error;
 
     public BaseResponse() {

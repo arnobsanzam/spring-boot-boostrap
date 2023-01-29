@@ -1,7 +1,9 @@
 package com.example.springbootboostrap.route;
 
 public class AppRoute {
+
     public static final  String API = "/api";
+
     public static class Auth {
         public static final String LOGIN = "/auth/login";
         public static final String LOGOUT = "/auth/logout";

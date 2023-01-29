@@ -6,8 +6,6 @@ import com.example.springbootboostrap.dto.response.user.UserListResponse;
 import com.example.springbootboostrap.entity.User;
 import com.example.springbootboostrap.record.UserInfo;
 
-import java.util.List;
-
 public interface UserService {
 
     UserCreationResponse createUser(UserCreationRequest request);

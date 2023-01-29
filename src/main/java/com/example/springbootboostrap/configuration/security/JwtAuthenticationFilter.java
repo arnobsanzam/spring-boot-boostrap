@@ -46,6 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (Objects.nonNull(requestTokenHeader) && requestTokenHeader.startsWith("Bearer ")) {
             return requestTokenHeader.substring(7);
         }
+
         throw new BaseException(AppConstant.ExceptionMessage.BEARER_TOKEN_NOT_FOUND);
     }
 }

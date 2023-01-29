@@ -5,6 +5,8 @@ import lombok.Data;
 
 @Data
 public class UserCreationRequest extends BaseRequest {
+
     private final String username;
+
     private final String password;
 }

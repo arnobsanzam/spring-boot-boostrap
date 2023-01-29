@@ -22,11 +22,11 @@ public class RequestResponseAspect {
     private static final ThreadLocal<String> requestId = new ThreadLocal<>();
 
     @Pointcut("within(@org.springframework.web.bind.annotation.RestController *)")
-    public void controller() {
+    private void controller() {
     }
 
     @Pointcut("execution(* *(..))")
-    protected void allMethod() {
+    private void allMethod() {
     }
 
     @Before("controller() && allMethod()")

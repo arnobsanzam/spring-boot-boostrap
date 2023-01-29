@@ -1,6 +1,7 @@
 package com.example.springbootboostrap.constant;
 
 public class AppConstant {
+
     public class ExceptionMessage {
         public static String USERNAME_ALREADY_EXISTS = "Username already exists.";
         public static String USER_IS_TEMPORARILY_DISABLED = "User is temporarily disabled.";

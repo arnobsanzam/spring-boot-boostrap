@@ -17,6 +17,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 public class Role extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
