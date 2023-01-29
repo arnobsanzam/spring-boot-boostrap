@@ -50,7 +50,7 @@ public class RequestResponseAspect {
             response.setRequestId(requestId.get());
             response.setRequestTime(requestTime.get());
             response.setResponseTime(new Date());
-            response.setProcessingTime(AppUtil.getTimeDifferenceInSecond(response.getRequestTime(), response.getResponseTime()));
+            response.setProcessingTime(AppUtil.getTimeDifferenceInSeconds(response.getRequestTime(), response.getResponseTime()));
         }
     }
 }

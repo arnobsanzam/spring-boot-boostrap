@@ -17,7 +17,7 @@ public class JwtUtil {
     private static final String secretKey = "6975a8b0cdde097a1c9b9a9b9a9d9d9d9a9a9a9a9a9b9a9b9a9c9c9c9c9c9c9c";
     private static Key key = Keys.hmacShaKeyFor(secretKey.getBytes());
 
-    private static final long validityInMilliseconds = 360000;
+    private static final long validityInMilliseconds = 3600000;
 
     public static String createToken(String username, Set<Role> roles) {
         Claims claims = Jwts.claims().setSubject(username);

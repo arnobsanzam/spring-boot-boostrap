@@ -9,7 +9,8 @@ public class AppRoute {
     }
 
     public static class User {
-        public static final String CREATE_USER = "/user/create";
-        public static final String GET_USER_BY_ID = "/user/{id}";
+        public static final String CREATE_USER = "/users";
+        public static final String GET_USER_BY_ID = "/users/{id}";
+        public static final String GET_ALL_USER = "/users";
     }
 }
