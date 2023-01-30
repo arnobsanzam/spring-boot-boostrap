@@ -10,6 +10,7 @@ import com.example.springbootboostrap.service.user.UserService;
 import com.example.springbootboostrap.util.AppUtil;
 import com.example.springbootboostrap.util.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +27,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public LoginResponse login(LoginRequest request) {
-        try {
-            validateLoginRequest(request);
-            final String token = getToken(request);
-            return authenticationMapper.toLoginResponse(token);
-        } catch (Exception ex) {
-            return authenticationMapper.toErrorResponse(new LoginResponse(), ex);
-        }
+        validateLoginRequest(request);
+        final String token = getToken(request);
+        return authenticationMapper.toLoginResponse(token, HttpStatus.OK);
     }
 
     private String getToken(LoginRequest request) {

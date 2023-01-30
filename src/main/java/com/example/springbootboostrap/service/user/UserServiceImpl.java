@@ -3,15 +3,16 @@ package com.example.springbootboostrap.service.user;
 import com.example.springbootboostrap.appenum.RoleType;
 import com.example.springbootboostrap.constant.AppConstant;
 import com.example.springbootboostrap.dto.request.user.UserCreationRequest;
-import com.example.springbootboostrap.dto.response.user.UserCreationResponse;
+import com.example.springbootboostrap.dto.response.user.UserDetailsResponse;
 import com.example.springbootboostrap.dto.response.user.UserListResponse;
 import com.example.springbootboostrap.entity.Role;
 import com.example.springbootboostrap.entity.User;
 import com.example.springbootboostrap.exception.BaseException;
+import com.example.springbootboostrap.exception.EntityNotFoundException;
 import com.example.springbootboostrap.mapper.UserMapper;
-import com.example.springbootboostrap.record.UserInfo;
 import com.example.springbootboostrap.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -28,26 +29,22 @@ public class UserServiceImpl implements UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public UserCreationResponse createUser(UserCreationRequest request) {
-        try {
-            validateUserCreationRequest(request);
-            final User user = userMapper.toEntity(request);
-            user.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
-            final Role role = new Role();
-            role.setRoleName(RoleType.ROLE_USER);
-            user.setRoles(new HashSet<>(Collections.singletonList(role)));
-            final User savedUser = userRepository.save(user);
-            return userMapper.toUserCreationResponse(savedUser);
-        } catch (Exception ex) {
-            return userMapper.toErrorResponse(new UserCreationResponse(), ex);
-        }
+    public UserDetailsResponse createUser(UserCreationRequest request) {
+        validateUserCreationRequest(request);
+        final User user = userMapper.toEntity(request);
+        user.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
+        final Role role = new Role();
+        role.setRoleName(RoleType.ROLE_USER);
+        user.setRoles(new HashSet<>(Collections.singletonList(role)));
+        final User savedUser = userRepository.save(user);
+        return userMapper.toUserDetailsResponse(savedUser, HttpStatus.CREATED);
     }
+
 
     @Override
     public void saveUser(User user) {
         userRepository.save(user);
     }
-
 
     @Override
     public User getUserByUsername(String username) {
@@ -56,19 +53,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserInfo getUserInfoByUsername(String username) {
-        final User user = getUserByUsername(username);
-        return new UserInfo(username, user.getAuthorities());
+    public UserListResponse getAllUsers() {
+
+        List<User> users = userRepository.findAll();
+        return userMapper.toUserListResponse(users, HttpStatus.OK);
+
     }
 
     @Override
-    public UserListResponse getAllUsers() {
-        try {
-            List<User> users = userRepository.findAll();
-            return userMapper.toUserListResponse(users);
-        } catch (Exception ex) {
-            return userMapper.toErrorResponse(new UserListResponse(), ex);
-        }
+    public UserDetailsResponse getUserById(Long id) {
+        final User user = userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(AppConstant.ExceptionMessage.USER_DOES_NOT_EXIST_BY_ID));
+        return userMapper.toUserDetailsResponse(user, HttpStatus.OK);
     }
 
     private void validateUserCreationRequest(UserCreationRequest request) {

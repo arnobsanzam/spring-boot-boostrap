@@ -1,7 +1,7 @@
 package com.example.springbootboostrap.controller.test;
 
 import com.example.springbootboostrap.dto.request.user.UserCreationRequest;
-import com.example.springbootboostrap.dto.response.user.UserCreationResponse;
+import com.example.springbootboostrap.dto.response.user.UserDetailsResponse;
 import com.example.springbootboostrap.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class TestController {
     private final UserService userService;
 
     @PostMapping(value = "/endpoint")
-    public ResponseEntity<UserCreationResponse> test(@RequestBody UserCreationRequest userCreationRequest) {
+    public ResponseEntity<UserDetailsResponse> test(@RequestBody UserCreationRequest userCreationRequest) {
         return ResponseEntity.ok().body(userService.createUser(userCreationRequest));
     }
 }

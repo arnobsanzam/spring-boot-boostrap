@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class UserListResponse extends BaseResponse {
 
-    List<UserCreationResponse> users;
+    List<UserDetailsResponse> users;
 }

@@ -3,7 +3,6 @@ package com.example.springbootboostrap.aspect;
 import com.example.springbootboostrap.dto.request.BaseRequest;
 import com.example.springbootboostrap.dto.response.BaseResponse;
 import com.example.springbootboostrap.util.AppUtil;
-import com.example.springbootboostrap.util.LogUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -28,6 +27,10 @@ public class RequestResponseAspect {
     private void controller() {
     }
 
+    @Pointcut("within(@org.springframework.web.bind.annotation.RestControllerAdvice *)")
+    private void controllerAdvice() {
+    }
+
     @Pointcut("execution(* *(..))")
     private void allMethod() {
     }
@@ -50,6 +53,18 @@ public class RequestResponseAspect {
     public void processResponse(JoinPoint joinPoint, Object result) {
         if(((ResponseEntity) result).getBody() instanceof BaseResponse) {
             BaseResponse response = (BaseResponse) ((ResponseEntity) result).getBody();
+            response.setRequestId(requestId.get());
+            response.setRequestTime(requestTime.get());
+            response.setResponseTime(new Date());
+            response.setProcessingTime(AppUtil.getTimeDifferenceInSeconds(response.getRequestTime(), response.getResponseTime()));
+        }
+    }
+
+    @AfterReturning(pointcut = "controllerAdvice() && allMethod()", returning = "result")
+    public void processErrorResponse(JoinPoint joinPoint, Object result) {
+        if(((ResponseEntity) result).getBody() instanceof BaseResponse) {
+            BaseResponse response = (BaseResponse) ((ResponseEntity) result).getBody();
+            response.setHttpStatus(((ResponseEntity<?>) result).getStatusCode());
             response.setRequestId(requestId.get());
             response.setRequestTime(requestTime.get());
             response.setResponseTime(new Date());
