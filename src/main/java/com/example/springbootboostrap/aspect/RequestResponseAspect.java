@@ -39,7 +39,7 @@ public class RequestResponseAspect {
     public void processRequest(JoinPoint joinPoint) {
         requestTime.set(new Date());
         requestId.set(UUID.randomUUID().toString());
-        Object[] args = joinPoint.getArgs();
+        final Object[] args = joinPoint.getArgs();
         for (Object arg : args) {
             if (arg instanceof BaseRequest) {
                 BaseRequest request = (BaseRequest) arg;
@@ -52,7 +52,7 @@ public class RequestResponseAspect {
     @AfterReturning(pointcut = "controller() && allMethod()", returning = "result")
     public void processResponse(JoinPoint joinPoint, Object result) {
         if(((ResponseEntity) result).getBody() instanceof BaseResponse) {
-            BaseResponse response = (BaseResponse) ((ResponseEntity) result).getBody();
+            final BaseResponse response = (BaseResponse) ((ResponseEntity) result).getBody();
             response.setRequestId(requestId.get());
             response.setRequestTime(requestTime.get());
             response.setResponseTime(new Date());
@@ -63,7 +63,7 @@ public class RequestResponseAspect {
     @AfterReturning(pointcut = "controllerAdvice() && allMethod()", returning = "result")
     public void processErrorResponse(JoinPoint joinPoint, Object result) {
         if(((ResponseEntity) result).getBody() instanceof BaseResponse) {
-            BaseResponse response = (BaseResponse) ((ResponseEntity) result).getBody();
+            final BaseResponse response = (BaseResponse) ((ResponseEntity) result).getBody();
             response.setHttpStatus(((ResponseEntity<?>) result).getStatusCode());
             response.setRequestId(requestId.get());
             response.setRequestTime(requestTime.get());
