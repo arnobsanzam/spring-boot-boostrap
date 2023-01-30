@@ -3,6 +3,8 @@ package com.example.springbootboostrap.aspect;
 import com.example.springbootboostrap.dto.request.BaseRequest;
 import com.example.springbootboostrap.dto.response.BaseResponse;
 import com.example.springbootboostrap.util.AppUtil;
+import com.example.springbootboostrap.util.LogUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,6 +18,7 @@ import java.util.UUID;
 
 @Aspect
 @Component
+@Slf4j
 public class RequestResponseAspect {
 
     private static final ThreadLocal<Date> requestTime = new ThreadLocal<>();

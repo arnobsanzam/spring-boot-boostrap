@@ -1,5 +1,6 @@
 package com.example.springbootboostrap.service.userService;
 
+import com.example.springbootboostrap.appenum.RoleType;
 import com.example.springbootboostrap.entity.Role;
 import com.example.springbootboostrap.entity.User;
 import com.example.springbootboostrap.repository.UserRepository;
@@ -15,9 +16,6 @@ import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -37,7 +35,7 @@ public class UserServiceTest {
 
         Role role = new Role();
         role.setId(1001L);
-        role.setRoleName("test-role");
+        role.setRoleName(RoleType.ROLE_USER);
         Set<Role> roles = new HashSet<>();
         roles.add(role);
         user.setRoles(roles);
@@ -45,7 +43,7 @@ public class UserServiceTest {
         assertNotNull(user);
         assertEquals("test-user", user.getUsername());
         assertEquals("test-password", user.getPassword());
-        assertEquals("test-role", user.getRoles().iterator().next().getRoleName());
+        assertEquals(RoleType.ROLE_USER, user.getRoles().iterator().next().getRoleName());
     }
 }
 
