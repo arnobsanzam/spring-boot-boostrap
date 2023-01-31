@@ -1,7 +1,7 @@
 package com.example.springbootboostrap.controller.authentication;
 
 import com.example.springbootboostrap.dto.request.authentication.LoginRequest;
-import com.example.springbootboostrap.dto.response.authentication.LoginResponse;
+import com.example.springbootboostrap.dto.response.BaseResponse;
 import com.example.springbootboostrap.route.AppRoute;
 import com.example.springbootboostrap.service.authentication.AuthenticationService;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping(AppRoute.Auth.LOGIN)
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<BaseResponse> login(@RequestBody LoginRequest request) {
         return ResponseEntity.ok().body(authenticationService.login(request));
     }
 }
