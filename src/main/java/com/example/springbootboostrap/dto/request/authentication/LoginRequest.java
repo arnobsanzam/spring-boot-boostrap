@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class LoginRequest extends BaseRequest {
 
-    private String username;
+    private final String username;
 
     private String password;
 }

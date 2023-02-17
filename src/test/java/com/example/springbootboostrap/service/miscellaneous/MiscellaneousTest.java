@@ -1,5 +1,6 @@
 package com.example.springbootboostrap.service.miscellaneous;
 
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,5 +21,22 @@ public class MiscellaneousTest {
         System.out.printf(" " + s2.hashCode());
     }
 
+    @Test
+    public void testEnum() {
+        CustomerProfileDto customerProfileDto = new CustomerProfileDto();
+        customerProfileDto.setCustomertype(Customertype.CORPORATE);
+        boolean matched = Customertype.CORPORATE.equals(customerProfileDto.getCustomertype());
+    }
 }
+
+enum Customertype {
+    INDIVIDUAL,
+    CORPORATE
+}
+
+@Data
+class CustomerProfileDto {
+    Customertype customertype;
+}
+
 
