@@ -1,6 +1,6 @@
 package com.example.springbootboostrap.service.user;
 
-import com.example.springbootboostrap.appenum.RoleType;
+import com.example.springbootboostrap.enums.RoleType;
 import com.example.springbootboostrap.constant.AppConstant;
 import com.example.springbootboostrap.dto.request.user.UserCreationRequest;
 import com.example.springbootboostrap.dto.response.user.UserDetailsResponse;

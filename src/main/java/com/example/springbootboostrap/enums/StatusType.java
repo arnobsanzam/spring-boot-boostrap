@@ -1,4 +1,4 @@
-package com.example.springbootboostrap.appenum;
+package com.example.springbootboostrap.enums;
 
 public enum StatusType {
     SUCCESSFUL,

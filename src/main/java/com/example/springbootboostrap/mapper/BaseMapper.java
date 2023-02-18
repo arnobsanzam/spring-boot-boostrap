@@ -1,6 +1,6 @@
 package com.example.springbootboostrap.mapper;
 
-import com.example.springbootboostrap.appenum.StatusType;
+import com.example.springbootboostrap.enums.StatusType;
 import com.example.springbootboostrap.dto.response.BaseResponse;
 
 

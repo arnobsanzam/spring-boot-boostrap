@@ -1,6 +1,6 @@
 package com.example.springbootboostrap.entity;
 
-import com.example.springbootboostrap.appenum.RoleType;
+import com.example.springbootboostrap.enums.RoleType;
 import lombok.Getter;
 import lombok.Setter;
 

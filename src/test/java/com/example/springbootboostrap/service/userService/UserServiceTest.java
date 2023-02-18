@@ -1,6 +1,6 @@
 package com.example.springbootboostrap.service.userService;
 
-import com.example.springbootboostrap.appenum.RoleType;
+import com.example.springbootboostrap.enums.RoleType;
 import com.example.springbootboostrap.entity.Role;
 import com.example.springbootboostrap.entity.User;
 import com.example.springbootboostrap.repository.UserRepository;

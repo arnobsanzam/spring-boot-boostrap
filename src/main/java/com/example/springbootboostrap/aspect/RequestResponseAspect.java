@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.UUID;
 
 @Aspect
@@ -68,7 +69,9 @@ public class RequestResponseAspect {
             response.setRequestId(requestId.get());
             response.setRequestTime(requestTime.get());
             response.setResponseTime(new Date());
-            response.setProcessingTime(AppUtil.getTimeDifferenceInSeconds(response.getRequestTime(), response.getResponseTime()));
+            if (Objects.nonNull(response.getRequestTime()) && Objects.nonNull(response.getResponseTime())) {
+                response.setProcessingTime(AppUtil.getTimeDifferenceInSeconds(response.getRequestTime(), response.getResponseTime()));
+            }
         }
     }
 }

@@ -5,6 +5,7 @@ public class AppConstant {
     public class Exception {
         public static String ENTITY_NOT_FOUND = "EntityNotFoundException occurred";
         public static String RUNTIME_EXCEPTION = "RuntimeException occurred";
+        public static String REQUEST_NOT_PERMITTED = "RequestNotPermittedExceptio occurred";
     }
 
     public class ExceptionMessage {
@@ -16,6 +17,7 @@ public class AppConstant {
         public static String USER_DOES_NOT_EXIST_BY_ID = "User does not exist by userId";
         public static String BEARER_TOKEN_NOT_FOUND = "Bearer token not found";
         public static String UNEXPECTED_ERROR_OCCURED = "Unexpected error";
+        public static String TOO_MANY_REQUESTS = "Too many requests";
     }
 
     public class Security {

@@ -1,6 +1,6 @@
 package com.example.springbootboostrap.dto.response;
 
-import com.example.springbootboostrap.appenum.StatusType;
+import com.example.springbootboostrap.enums.StatusType;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 

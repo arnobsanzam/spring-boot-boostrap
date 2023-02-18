@@ -3,6 +3,7 @@ package com.example.springbootboostrap.exception.exceptionhandler;
 import com.example.springbootboostrap.constant.AppConstant;
 import com.example.springbootboostrap.dto.response.error.ErrorResponse;
 import com.example.springbootboostrap.exception.EntityNotFoundException;
+import io.github.resilience4j.ratelimiter.RequestNotPermitted;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -22,6 +23,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
                         .debugMessage(ex.getLocalizedMessage()).build());
     }
 
+    @ExceptionHandler(RequestNotPermitted.class)
+    public ResponseEntity<ErrorResponse> handleRequestNotPermitted(RequestNotPermitted ex) {
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .body(ErrorResponse
+                        .builder()
+                        .error(AppConstant.Exception.REQUEST_NOT_PERMITTED)
+                        .debugMessage(ex.getLocalizedMessage()).build());
+    }
 
     @ExceptionHandler(RuntimeException.class)
     protected ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException ex) {
