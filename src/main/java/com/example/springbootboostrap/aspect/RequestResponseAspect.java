@@ -59,6 +59,8 @@ public class RequestResponseAspect {
             response.setResponseTime(new Date());
             response.setProcessingTime(AppUtil.getTimeDifferenceInSeconds(response.getRequestTime(), response.getResponseTime()));
         }
+        requestTime.remove();
+        requestId.remove();
     }
 
     @AfterReturning(pointcut = "controllerAdvice() && allMethod()", returning = "result")
@@ -73,6 +75,8 @@ public class RequestResponseAspect {
                 response.setProcessingTime(AppUtil.getTimeDifferenceInSeconds(response.getRequestTime(), response.getResponseTime()));
             }
         }
+        requestTime.remove();
+        requestId.remove();
     }
 }
 

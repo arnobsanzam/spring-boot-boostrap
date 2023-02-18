@@ -5,7 +5,7 @@ public class AppConstant {
     public class Exception {
         public static String ENTITY_NOT_FOUND = "EntityNotFoundException occurred";
         public static String RUNTIME_EXCEPTION = "RuntimeException occurred";
-        public static String REQUEST_NOT_PERMITTED = "RequestNotPermittedExceptio occurred";
+        public static String REQUEST_NOT_PERMITTED = "RequestNotPermittedException occurred";
     }
 
     public class ExceptionMessage {
