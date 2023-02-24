@@ -28,6 +28,7 @@ public class BeanConfiguration {
     }
 
 
+    @Deprecated
     @Bean
     public RateLimiterRegistry rateLimiterRegistry() {
         RateLimiterRegistry rateLimiterRegistry = RateLimiterRegistry.ofDefaults();

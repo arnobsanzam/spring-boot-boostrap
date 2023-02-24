@@ -1,12 +1,11 @@
 package com.example.springbootboostrap.controller.user;
 
-import com.example.springbootboostrap.dto.request.BaseRequest;
+import com.example.springbootboostrap.annotation.LimitedTraffic;
 import com.example.springbootboostrap.dto.request.user.UserCreationRequest;
 import com.example.springbootboostrap.dto.response.BaseResponse;
+import com.example.springbootboostrap.enums.BandwidthType;
 import com.example.springbootboostrap.route.AppRoute;
 import com.example.springbootboostrap.service.user.UserService;
-import io.github.resilience4j.ratelimiter.RequestNotPermitted;
-import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,7 +36,7 @@ public class UserController {
         return ResponseEntity.status(response.getHttpStatus()).body(response);
     }
 
-    @RateLimiter(name = "getUserById")
+    @LimitedTraffic(endpointName = AppRoute.User.GET_USER_BY_ID, bandwidthType = BandwidthType.FIVE_REQUESTS_PER_MINUTE)
     @GetMapping(AppRoute.User.GET_USER_BY_ID)
     public ResponseEntity<BaseResponse> getUserById(@PathVariable Long id) {
         final BaseResponse response = userService.getUserById(id);
