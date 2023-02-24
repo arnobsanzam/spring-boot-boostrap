@@ -1,0 +1,2 @@
+# spring-boot-boostrap
+This is my Spring Boot project template, which I use as a starting point for new projects. The structure is designed to facilitate rapid development and easy maintenance. I'm constantly refining and improving the template to incorporate the latest best practices and techniques for Spring Boot development. This project is my personal sandbox where I experiment with new ideas and explore new features of Spring Boot. By using this template, I hope to achieve higher efficiency and faster time-to-market for my projects.
