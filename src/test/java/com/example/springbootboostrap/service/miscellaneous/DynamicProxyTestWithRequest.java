@@ -1,4 +1,4 @@
-package com.example.sandbox;
+package com.example.springbootboostrap.service.miscellaneous;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
@@ -38,13 +38,14 @@ class DynamicProxyTestWithRequest {
     void controller(Request request) {
         Service service = new ServiceImpl();
         RequestHandler requestHandler = new RequestHandler(service);
-        Service serviceProxy = (Service) Proxy.newProxyInstance(Service.class.getClassLoader(), new Class[] {Service.class}, requestHandler);
+        Service serviceProxy = (Service) Proxy.newProxyInstance(Service.class.getClassLoader(), new Class[]{Service.class}, requestHandler);
         serviceProxy.service(request);
     }
 
     interface Service {
         void service(Request request);
     }
+
     class ServiceImpl implements Service {
         @Override
         public void service(Request request) {
@@ -65,6 +66,7 @@ class DynamicProxyTestWithRequest {
     class RequestHandler implements InvocationHandler {
 
         Object target;
+
         RequestHandler(Object target) {
             this.target = target;
         }

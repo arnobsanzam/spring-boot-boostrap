@@ -1,4 +1,4 @@
-package com.example.sandbox;
+package com.example.springbootboostrap.service.miscellaneous;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -11,9 +11,10 @@ import java.lang.reflect.Proxy;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 @ExtendWith(MockitoExtension.class)
 @Slf4j
-class DynamicProxyTest {  
+class DynamicProxyTest {
 
     @Test
     public void demo() {
@@ -27,7 +28,8 @@ class DynamicProxyTest {
 
     class LoggingHandler implements InvocationHandler {
         Object target;
-        public LoggingHandler (Object target) {
+
+        public LoggingHandler(Object target) {
             this.target = target;
         }
 
@@ -56,9 +58,7 @@ class DynamicProxyTest {
         CalculatorImpl calculator = new CalculatorImpl();
         LoggingHandler loggingHandler = new LoggingHandler(calculator);
 
-        Calculator proxy = (Calculator) Proxy.newProxyInstance(Calculator.class.getClassLoader(),  new Class[] {Calculator.class}, loggingHandler);
+        Calculator proxy = (Calculator) Proxy.newProxyInstance(Calculator.class.getClassLoader(), new Class[]{Calculator.class}, loggingHandler);
         int result = proxy.sum(2, 3);
     }
-
-
 }

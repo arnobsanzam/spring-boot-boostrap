@@ -2,7 +2,7 @@ package com.example.springbootboostrap.aspect;
 
 
 import com.example.springbootboostrap.annotation.LimitedTraffic;
-import com.example.springbootboostrap.annotationprocessor.LimitedTrafficAnnotationProcessor;
+import com.example.springbootboostrap.annotationprocessor.BucketResolver;
 import com.example.springbootboostrap.exception.RequestNotPermittedException;
 import com.example.springbootboostrap.util.LogUtil;
 import io.github.bucket4j.Bucket;
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class LimitedTrafficAdvice {
 
-    private final LimitedTrafficAnnotationProcessor limitedTrafficAnnotationProcessor;
+    private final BucketResolver bucketResolver;
 
     @Pointcut("@annotation(com.robi.da.validator.LimitedTraffic)")
     private void limitTraffic() {
@@ -28,7 +28,7 @@ public class LimitedTrafficAdvice {
 
     @Before("limitTraffic() && @annotation(limitedTraffic)")
     public void validateRequest(JoinPoint joinPoint, LimitedTraffic limitedTraffic) {
-        final Bucket bucket = limitedTrafficAnnotationProcessor.getBucket(limitedTraffic.endpointName());
+        final Bucket bucket = bucketResolver.getBucket(limitedTraffic.endpointName());
         if (bucket.tryConsume(1)) {
             LogUtil.logInfo(log, "Consumed token || Remaining tokens : " + bucket.getAvailableTokens());
         } else {

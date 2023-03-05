@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Component
 @Slf4j
-public class LimitedTrafficAnnotationProcessor {
+public class BucketResolver {
 
     private final Map<String, Bucket> bucketMap = new HashMap<>();
 
